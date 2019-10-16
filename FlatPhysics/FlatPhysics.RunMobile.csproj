@@ -50,15 +50,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <ProjectReference Include="..\RunMobile\RunMobile.csproj">
-      <Project>{B6B7376F-CF08-42A1-A970-69B63EF21F75}</Project>
-      <Name>RunMobile</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <ProjectReference Include="..\RunMobile\RunMobile.csproj">
+    <ProjectReference Include="..\..\RunMobile\RunMobile\RunMobile.csproj">
       <Project>{B6B7376F-CF08-42A1-A970-69B63EF21F75}</Project>
       <Name>RunMobile</Name>
     </ProjectReference>
