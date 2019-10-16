@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59BDB480-E765-4435-8AE2-32A7846FE705}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FlatPhysics</RootNamespace>
+    <AssemblyName>FlatPhysics</AssemblyName>
+    <DefineConstants>USE_MATHF</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>DEBUG</DefineConstants>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>bin\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
+    <OutputPath>bin\Debug.Numerics\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
+    <OutputPath>bin\Release.Numerics\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <ProjectReference Include="..\RunMobile\RunMobile.csproj">
+      <Project>{B6B7376F-CF08-42A1-A970-69B63EF21F75}</Project>
+      <Name>RunMobile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <ProjectReference Include="..\RunMobile\RunMobile.csproj">
+      <Project>{B6B7376F-CF08-42A1-A970-69B63EF21F75}</Project>
+      <Name>RunMobile</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collision\BaseShape.cs" />
+    <Compile Include="Collision\IShape.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Collision\CircleShape.cs" />
+    <Compile Include="Collision\CollisionHelper.cs" />
+    <Compile Include="Collision\CollisionResult.cs" />
+    <Compile Include="Collision\NoneShape.cs" />
+    <Compile Include="Collision\PointShape.cs" />
+    <Compile Include="Collision\PolygonShape.cs" />
+    <Compile Include="Collision\RectangleShape.cs" />
+    <Compile Include="Collision\ShapeType.cs" />
+    <Compile Include="Collision\Transform.cs" />
+    <Compile Include="MoveMathVector.cs" />
+    <Compile Include="Collision\ComplexShape.cs" />
+    <Compile Include="Collision\Fixture.cs" />
+    <Compile Include="Mathf.cs" />
+    <Compile Include="Map\BaseMapInstance.cs" />
+    <Compile Include="Map\BaseMapTile.cs" />
+    <Compile Include="Map\IGuidable.cs" />
+    <Compile Include="Map\ObjectArray.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Map\" />
+  </ItemGroup>
+</Project>
