@@ -6,14 +6,13 @@
     <ProjectGuid>{59BDB480-E765-4435-8AE2-32A7846FE705}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
-    <AssemblyName>FlatPhysics</AssemblyName>
-    <DefineConstants>RUNSERVER</DefineConstants>
+    <AssemblyName>FlatPhysics.RunServer</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug.Server</OutputPath>
+    <OutputPath>bin\Debug.RunServer</OutputPath>
     <DefineConstants>DEBUG;RUNSERVER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -23,11 +22,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType></DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release.Server</OutputPath>
+    <OutputPath>bin\Release.RunServer</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>RUNSERVER</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

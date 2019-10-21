@@ -8,12 +8,12 @@
     <ProjectGuid>{59BDB480-E765-4435-8AE2-32A7846FE705}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
-    <AssemblyName>FlatPhysics</AssemblyName>
+    <AssemblyName>FlatPhysics.RunMobile</AssemblyName>
     <DefineConstants>USE_MATHF</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>bin\Debug.RunMobile</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
@@ -23,7 +23,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Release.RunMobile</OutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
@@ -31,7 +31,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
-    <OutputPath>bin\Debug.Numerics\</OutputPath>
+    <OutputPath>bin\Debug.RunMobile.Numerics\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -40,7 +40,7 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
-    <OutputPath>bin\Release.Numerics\</OutputPath>
+    <OutputPath>bin\Release.RunMobile.Numerics\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
