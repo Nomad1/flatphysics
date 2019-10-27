@@ -41,10 +41,12 @@ namespace FlatPhysics.Collision
                 return false;
 
             Vector2 ray = to - from;
-            float len = ray.Normalize();
+            float len = ray.Length(); // normalization with storing previous length value
+            ray /= len;
 
             Vector2 cray = center - from;
-            float clen = cray.Normalize();
+            float clen = cray.Length(); // normalization with storing previous length value
+            cray /= clen;
 
             if (Math.Abs(ray.X - cray.X) > float.Epsilon || Math.Abs(ray.Y - cray.Y) > float.Epsilon)
                 return false;
