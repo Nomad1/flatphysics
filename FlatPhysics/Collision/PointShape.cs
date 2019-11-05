@@ -53,7 +53,7 @@ namespace FlatPhysics.Collision
 
             fraction = clen / len;
 
-            normal = to;
+            normal = to; // Nomad: I'm not sure we have normalized vector here. Check if it breaks something
 
             return true;
         }
