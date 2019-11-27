@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace FlatPhysics.Collision
 {
-    internal static class CollisionHelper
+    public static class CollisionHelper
     {
         #region Collisions
         //This part knows nothing about shapes and works only with raw data
