@@ -1,5 +1,4 @@
-﻿using FlatPhysics.Collision;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Numerics;
 
 namespace FlatPhysics.Map
@@ -176,8 +175,16 @@ namespace FlatPhysics.Map
             for (int tileX = fromX; tileX <= toX; tileX++)
                 for (int tileY = fromY; tileY <= toY; tileY++)
                 {
-                    CollisionResult collision;
-                    if (CollisionHelper.CollideRectangleAndCircle(Vector2.Zero, m_tileSize, m_tileSize, new Transform(new Vector2(tileX * m_tileSize + m_tileSize * 0.5f, tileY * m_tileSize + m_tileSize * 0.5f), 0), Vector2.Zero, radius, new Transform(new Vector2(x, y), 0), out collision))
+                    float left = tileX * m_tileSize;
+                    float top = tileY * m_tileSize;
+                    float right = left + m_tileSize;
+                    float bottom = top + m_tileSize;
+
+
+                    float ix = x < left ? left : x > right ? right : x;
+                    float iy = y < top ? top : y > bottom ? bottom : y;
+
+                    if ((x - ix) * (x - ix) + (y - iy) * (y - iy) <= radiusSq)
                     {
                         BaseMapTile<TMapObject> tile = GetTile(tileX, tileY, autoCreate);
                         if (tile != null)
