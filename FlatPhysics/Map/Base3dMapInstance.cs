@@ -3,37 +3,24 @@ using System.Numerics;
 
 namespace FlatPhysics.Map
 {
-    public abstract class BaseMapInstance<TMapTile> where TMapTile : BaseMapTile<TMapTile>
+    public abstract class Base3dMapInstance
     {
         public const int DefaultTileExpireTime = 30000;
 
-        private readonly IDictionary<ulong, TMapTile> m_tiles = new Dictionary<ulong, TMapTile>();
-        private readonly IDictionary<ulong, TMapTile> m_toCheckRemove = new Dictionary<ulong, TMapTile>();
+        private readonly IDictionary<ulong, Base3dMapTile> m_tiles = new Dictionary<ulong, Base3dMapTile>();
+        private readonly IDictionary<ulong, Base3dMapTile> m_toCheckRemove = new Dictionary<ulong, Base3dMapTile>();
         private readonly int m_tileSize;
         private readonly int m_halfTileSize;
         private readonly int m_tileExpireTime;
 
-        public static ulong GetTileId(float x, float y, float tileSize)
+        public static ulong GetTileId(float x, float y, float z, float tileSize)
         {
-            return GetTileId(Mathf.Floor(x / tileSize), Mathf.Floor(y / tileSize));
+            return GetTileId((short)Mathf.Floor(x / tileSize), (short)Mathf.Floor(y / tileSize), (short)Mathf.Floor(z / tileSize));
         }
 
-        [System.Obsolete]
-        public static ulong SafeGetTileId(int x, int y)
+        public static ulong GetTileId(short x, short y, short z)
         {
-            byte[] xBytes = System.BitConverter.GetBytes(x);
-            byte[] yBytes = System.BitConverter.GetBytes(y);
-
-            byte[] resultBytes = new byte[8];
-            System.Buffer.BlockCopy(xBytes, 0, resultBytes, 0, 4);
-            System.Buffer.BlockCopy(yBytes, 0, resultBytes, 4, 4);
-
-            return System.BitConverter.ToUInt64(resultBytes, 0);
-        }
-
-        public static ulong GetTileId(int x, int y)
-        {
-            return (ulong)(uint)y << 32 | (ulong)(uint)x;
+            return (ulong)(ushort)y << 32 | (ulong)(ushort)x << 16 | (ulong)(ushort)z;
         }
 
         public int TileSize
@@ -46,30 +33,28 @@ namespace FlatPhysics.Map
             get { return m_tileExpireTime; }
         }
 
-        protected BaseMapInstance(int tileSize, int tileExpireTime = DefaultTileExpireTime)
+        protected Base3dMapInstance(int tileSize, int tileExpireTime = DefaultTileExpireTime)
         {
             m_tileSize = tileSize;
             m_halfTileSize = tileSize / 2;
             m_tileExpireTime = tileExpireTime;
         }
 
-        public ICollection<TMapTile> GetAllTiles()
+        public ICollection<Base3dMapTile> GetAllTiles()
         {
             return m_tiles.Values;
         }
 
-        /*protected virtual TMapTile CreateTile(int x, int y)
+        protected virtual Base3dMapTile CreateTile(short x, short y, short z)
         {
-            return new TMapTile(this, x, y);
-        }*/
+            return new Base3dMapTile(this, x, y, z);
+        }
 
-        protected abstract TMapTile CreateTile(int x, int y);
-
-        public void Enter(IBaseMapObject<TMapTile> objectBase)
+        public void Enter(IBaseMapObject objectBase)
         {
-            TMapTile oldTile = objectBase.MapTile;
+            Base3dMapTile oldTile = objectBase.MapTile;
 
-            TMapTile mapTile = GetTileByPosition(objectBase.Position.X, objectBase.Position.Y, true);
+            Base3dMapTile mapTile = GetTileByPosition(objectBase.Position.X, objectBase.Position.Y, true);
 
             if (oldTile == mapTile)
             {
@@ -85,9 +70,9 @@ namespace FlatPhysics.Map
             mapTile.Enter(objectBase);
         }
 
-        public void Leave(IBaseMapObject<TMapTile> objectBase)
+        public void Leave(IBaseMapObject objectBase)
         {
-            TMapTile oldTile = objectBase.MapTile;
+            Base3dMapTile oldTile = objectBase.MapTile;
 
             if (oldTile != null)
                 oldTile.Leave(objectBase);
@@ -97,11 +82,11 @@ namespace FlatPhysics.Map
 
         #region Tile getters
 
-        public TMapTile GetTile(int tilex, int tiley, bool autoCreate)
+        public BaseMapTile GetTile(int tilex, int tiley, bool autoCreate)
         {
             ulong id = GetTileId(tilex, tiley);
 
-            TMapTile result;
+            BaseMapTile result;
             if (m_tiles.TryGetValue(id, out result))
                 return result;
 
@@ -111,14 +96,14 @@ namespace FlatPhysics.Map
             return result;
         }
 
-        public TMapTile GetTileByPosition(float x, float y, bool autoCreate)
+        public BaseMapTile GetTileByPosition(float x, float y, bool autoCreate)
         {
             int tilex = Mathf.Floor(x / m_tileSize);
             int tiley = Mathf.Floor(y / m_tileSize);
 
             ulong id = GetTileId(tilex, tiley);
 
-            TMapTile result;
+            BaseMapTile result;
             if (m_tiles.TryGetValue(id, out result))
                 return result;
 
@@ -128,7 +113,7 @@ namespace FlatPhysics.Map
             return result;
         }
 
-        public ICollection<TMapTile> GetTiles(float vfromX, float vfromY, float vtoX, float vtoY) // box
+        public ICollection<BaseMapTile> GetTiles(float vfromX, float vfromY, float vtoX, float vtoY) // box
         {
             int fromX = Mathf.Floor(Mathf.Min(vfromX, vtoX) / m_tileSize);
             int fromY = Mathf.Floor(Mathf.Min(vfromY, vtoY) / m_tileSize);
@@ -137,18 +122,18 @@ namespace FlatPhysics.Map
 
             if (fromX == toX && fromY == toY)
             {
-                TMapTile tile = GetTile(fromX, fromY, true);
+                BaseMapTile tile = GetTile(fromX, fromY, true);
                 if (tile == null)
-                    return new TMapTile[0];
+                    return new BaseMapTile[0];
                 return new[] { tile };
             }
 
-            List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1));
+            List<BaseMapTile> result = new List<BaseMapTile>((toX - fromX + 1) * (toY - fromY + 1));
 
             for (int tileX = fromX; tileX <= toX; tileX++)
                 for (int tileY = fromY; tileY <= toY; tileY++)
                 {
-                    TMapTile tile = GetTile(tileX, tileY, true);
+                    BaseMapTile tile = GetTile(tileX, tileY, true);
                     if (tile != null)
                         result.Add(tile);
                 }
@@ -156,7 +141,7 @@ namespace FlatPhysics.Map
             return result;
         }
 
-        public ICollection<TMapTile> GetTiles(float x, float y, float radius, bool autoCreate) // circle
+        public ICollection<BaseMapTile> GetTiles(float x, float y, float radius, bool autoCreate) // circle
         {
             int fromX = Mathf.Floor((x - radius) / m_tileSize);
             int fromY = Mathf.Floor((y - radius) / m_tileSize);
@@ -165,14 +150,14 @@ namespace FlatPhysics.Map
 
             if (fromX == toX && fromY == toY)
             {
-                TMapTile tile = GetTile(fromX, fromY, autoCreate);
+                BaseMapTile tile = GetTile(fromX, fromY, autoCreate);
                 if (tile == null)
-                    return new TMapTile[0];
-                return new TMapTile[] { tile };
+                    return new BaseMapTile[0];
+                return new BaseMapTile[] { tile };
             }
 
             float radiusSq = radius * radius;
-            List<TMapTile> result = new List<TMapTile>();
+            List<BaseMapTile> result = new List<BaseMapTile>();
 
             for (int tileX = fromX; tileX <= toX; tileX++)
                 for (int tileY = fromY; tileY <= toY; tileY++)
@@ -188,7 +173,7 @@ namespace FlatPhysics.Map
 
                     if ((x - ix) * (x - ix) + (y - iy) * (y - iy) <= radiusSq)
                     {
-                        TMapTile tile = GetTile(tileX, tileY, autoCreate);
+                        BaseMapTile tile = GetTile(tileX, tileY, autoCreate);
                         if (tile != null)
                         {
                             result.Add(tile);
@@ -199,12 +184,12 @@ namespace FlatPhysics.Map
             return result;
         }
 
-        public IBaseMapObject<TMapTile> GetObject(TMapTile sourceTile, ulong id)
+        public IBaseMapObject GetObject(BaseMapTile sourceTile, ulong id)
         {
-            foreach (TMapTile tile in GetNearestTiles(sourceTile, false))
+            foreach (BaseMapTile tile in GetNearestTiles(sourceTile, false))
                 if (tile != null)
                 {
-                    IBaseMapObject<TMapTile> obj = tile.GetObject(id);
+                    IBaseMapObject obj = tile.GetObject(id);
                     if (obj != null)
                         return obj;
                 }
@@ -217,9 +202,9 @@ namespace FlatPhysics.Map
         /// <param name="point"></param>
         /// <param name="autoCreate"></param>
         /// <returns></returns>
-        public ICollection<TMapTile> GetNearestTiles(float pointX, float pointY, bool autoCreate)
+        public ICollection<BaseMapTile> GetNearestTiles(float pointX, float pointY, bool autoCreate)
         {
-            List<TMapTile> result = new List<TMapTile>(4);
+            List<BaseMapTile> result = new List<BaseMapTile>(4);
 
             int x = Mathf.Floor(pointX / m_tileSize);
             int y = Mathf.Floor(pointY / m_tileSize);
@@ -228,22 +213,22 @@ namespace FlatPhysics.Map
             int shiftY = (pointY - y * m_tileSize) > m_halfTileSize ? 1 : -1;
 
             {
-                TMapTile tile = GetTile(x, y, autoCreate);
+                BaseMapTile tile = GetTile(x, y, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x + shiftX, y, autoCreate);
+                BaseMapTile tile = GetTile(x + shiftX, y, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x + shiftX, y + shiftY, autoCreate);
+                BaseMapTile tile = GetTile(x + shiftX, y + shiftY, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x, y + shiftY, autoCreate);
+                BaseMapTile tile = GetTile(x, y + shiftY, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
@@ -257,49 +242,49 @@ namespace FlatPhysics.Map
         /// <param name="sourceTile"></param>
         /// <param name="autoCreate"></param>
         /// <returns></returns>
-        public ICollection<TMapTile> GetNearestTiles(TMapTile sourceTile, bool autoCreate)
+        public ICollection<BaseMapTile> GetNearestTiles(BaseMapTile sourceTile, bool autoCreate)
         {
-            List<TMapTile> result = new List<TMapTile>(9);
+            List<BaseMapTile> result = new List<BaseMapTile>(9);
             int x = sourceTile.X;
             int y = sourceTile.Y;
             result.Add(sourceTile);
             {
-                TMapTile tile = GetTile(x + 1, y, autoCreate);
+                BaseMapTile tile = GetTile(x + 1, y, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x - 1, y, autoCreate);
+                BaseMapTile tile = GetTile(x - 1, y, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x + 1, y + 1, autoCreate);
+                BaseMapTile tile = GetTile(x + 1, y + 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x - 1, y + 1, autoCreate);
+                BaseMapTile tile = GetTile(x - 1, y + 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x + 1, y - 1, autoCreate);
+                BaseMapTile tile = GetTile(x + 1, y - 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x - 1, y - 1, autoCreate);
+                BaseMapTile tile = GetTile(x - 1, y - 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x, y + 1, autoCreate);
+                BaseMapTile tile = GetTile(x, y + 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
             {
-                TMapTile tile = GetTile(x, y - 1, autoCreate);
+                BaseMapTile tile = GetTile(x, y - 1, autoCreate);
                 if (tile != null)
                     result.Add(tile);
             }
@@ -317,11 +302,11 @@ namespace FlatPhysics.Map
 
                 if (tile.IsEmpty)
                 {
-                    ICollection<TMapTile> nearest = GetNearestTiles(tile, false);
+                    ICollection<BaseMapTile> nearest = GetNearestTiles(tile, false);
 
                     bool empty = true;
 
-                    foreach (TMapTile nearestTile in nearest)
+                    foreach (BaseMapTile nearestTile in nearest)
                         if (!nearestTile.IsEmpty)
                         {
                             empty = false;

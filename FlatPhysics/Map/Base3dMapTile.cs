@@ -2,32 +2,38 @@
 
 namespace FlatPhysics.Map
 {
-    public abstract class BaseMapTile<TMapTile> where TMapTile : BaseMapTile<TMapTile>
+    public class Base3dMapTile
     {
-        private readonly ObjectArray<IBaseMapObject<TMapTile>> m_objects = new ObjectArray<IBaseMapObject<TMapTile>>();
-        private readonly BaseMapInstance<TMapTile> m_map;
+        private readonly ObjectArray<IBaseMapObject> m_objects = new ObjectArray<IBaseMapObject>();
+        private readonly Base3dMapInstance m_map;
 
-        private readonly int m_x;
-        private readonly int m_y;
+        private readonly short m_x;
+        private readonly short m_y;
+        private readonly short m_z;
         private readonly ulong m_id;
 
         private long m_expireTime;
 
         private bool m_dirty;
 
-        public BaseMapInstance<TMapTile> Map
+        public Base3dMapInstance Map
         {
             get { return m_map; }
         }
 
-        public int X
+        public short X
         {
             get { return m_x; }
         }
 
-        public int Y
+        public short Y
         {
             get { return m_y; }
+        }
+
+        public short Z
+        {
+            get { return m_z; }
         }
 
         public ulong Id
@@ -50,12 +56,13 @@ namespace FlatPhysics.Map
             get { return m_expireTime < GameTime.Now; }
         }
 
-        public BaseMapTile(BaseMapInstance<TMapTile> map, int x, int y)
+        public Base3dMapTile(Base3dMapInstance map, short x, short y, short z)
         {
             m_map = map;
             m_x = x;
             m_y = y;
-            m_id = BaseMapInstance<TMapTile>.GetTileId(x, y);
+            m_z = z;
+            m_id = Base3dMapInstance.GetTileId(x, y, z);
             Advance();
         }
 
@@ -65,37 +72,37 @@ namespace FlatPhysics.Map
             m_dirty = true;
         }
 
-        public virtual void Enter(IBaseMapObject<TMapTile> objectBase)
+        public virtual void Enter(IBaseMapObject objectBase)
         {
             m_objects.Add(objectBase);
             Advance();
             Move(objectBase);
         }
 
-        public virtual void Leave(IBaseMapObject<TMapTile> objectBase)
+        public virtual void Leave(IBaseMapObject objectBase)
         {
             m_objects.Remove(objectBase);
             Advance();
         }
 
-        public virtual void Move(IBaseMapObject<TMapTile> obj)
+        public virtual void Move(IBaseMapObject obj)
         {
             Advance();
         }
 
-        public IBaseMapObject<TMapTile>[] GetObjects()
+        public IBaseMapObject[] GetObjects()
         {
             return m_objects.Array;
         }
 
-        public IBaseMapObject<TMapTile> GetObject(ulong id)
+        public IBaseMapObject GetObject(ulong id)
         {
             return m_objects[id];
         }
 
         public override string ToString()
         {
-            return string.Format("MapTile: X={0}, Y={1}, Dirty={2}, Objects={3}", X, Y, IsDirty, m_objects.Array.Length);
+            return string.Format("MapTile: X={0}, Y={1}, Z={2}, Dirty={3}, Objects={4}", X, Y, Z, IsDirty, m_objects.Array.Length);
         }
 
         public virtual void Clean()

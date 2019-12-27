@@ -82,8 +82,9 @@
     <Compile Include="Mathf.cs" />
     <Compile Include="Map\BaseMapInstance.cs" />
     <Compile Include="Map\BaseMapTile.cs" />
-    <Compile Include="Map\IGuidable.cs" />
     <Compile Include="Map\ObjectArray.cs" />
+    <Compile Include="Map\IBaseMapObject.cs" />
+    <Compile Include="Map\IGuidable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
