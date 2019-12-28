@@ -97,7 +97,7 @@ namespace FlatPhysics.Map
 
         #region Tile getters
 
-        public TMapTile GetTile(int tilex, int tiley, bool autoCreate)
+        protected TMapTile GetTile(int tilex, int tiley, bool autoCreate)
         {
             ulong id = GetTileId(tilex, tiley);
 

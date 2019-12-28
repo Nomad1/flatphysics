@@ -85,6 +85,8 @@
     <Compile Include="Map\ObjectArray.cs" />
     <Compile Include="Map\IBaseMapObject.cs" />
     <Compile Include="Map\IGuidable.cs" />
+    <Compile Include="Map\Base3dMapInstance.cs" />
+    <Compile Include="Map\Base3dMapTile.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

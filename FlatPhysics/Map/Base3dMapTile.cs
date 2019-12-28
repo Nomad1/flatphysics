@@ -2,10 +2,10 @@
 
 namespace FlatPhysics.Map
 {
-    public class Base3dMapTile
+    public class Base3dMapTile<TMapTile> where TMapTile : Base3dMapTile<TMapTile>
     {
-        private readonly ObjectArray<IBaseMapObject> m_objects = new ObjectArray<IBaseMapObject>();
-        private readonly Base3dMapInstance m_map;
+        private readonly ObjectArray<IBaseMapObject<TMapTile>> m_objects = new ObjectArray<IBaseMapObject<TMapTile>>();
+        private readonly Base3dMapInstance<TMapTile> m_map;
 
         private readonly short m_x;
         private readonly short m_y;
@@ -16,7 +16,7 @@ namespace FlatPhysics.Map
 
         private bool m_dirty;
 
-        public Base3dMapInstance Map
+        public Base3dMapInstance<TMapTile> Map
         {
             get { return m_map; }
         }
@@ -56,13 +56,13 @@ namespace FlatPhysics.Map
             get { return m_expireTime < GameTime.Now; }
         }
 
-        public Base3dMapTile(Base3dMapInstance map, short x, short y, short z)
+        public Base3dMapTile(Base3dMapInstance<TMapTile> map, short x, short y, short z)
         {
             m_map = map;
             m_x = x;
             m_y = y;
             m_z = z;
-            m_id = Base3dMapInstance.GetTileId(x, y, z);
+            m_id = Base3dMapInstance<TMapTile>.GetTileId(x, y, z);
             Advance();
         }
 
@@ -72,30 +72,30 @@ namespace FlatPhysics.Map
             m_dirty = true;
         }
 
-        public virtual void Enter(IBaseMapObject objectBase)
+        public virtual void Enter(IBaseMapObject<TMapTile> objectBase)
         {
             m_objects.Add(objectBase);
             Advance();
             Move(objectBase);
         }
 
-        public virtual void Leave(IBaseMapObject objectBase)
+        public virtual void Leave(IBaseMapObject<TMapTile> objectBase)
         {
             m_objects.Remove(objectBase);
             Advance();
         }
 
-        public virtual void Move(IBaseMapObject obj)
+        public virtual void Move(IBaseMapObject<TMapTile> obj)
         {
             Advance();
         }
 
-        public IBaseMapObject[] GetObjects()
+        public IBaseMapObject<TMapTile>[] GetObjects()
         {
             return m_objects.Array;
         }
 
-        public IBaseMapObject GetObject(ulong id)
+        public IBaseMapObject<TMapTile> GetObject(ulong id)
         {
             return m_objects[id];
         }
