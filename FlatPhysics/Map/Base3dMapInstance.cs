@@ -257,6 +257,23 @@ namespace FlatPhysics.Map
             return result;
         }
 
+        public ICollection<TMapTile> GetTiles(TMapTile sourceTile, int range, bool autoCreate)
+        {
+            List<TMapTile> result = new List<TMapTile>(27);
+
+            for (int z = -range; z <= range; z++)
+                for (int y = -range; y <= range; y++)
+                    for (int x = -range; x <= range; x++)
+                    {
+                        TMapTile tile = GetTile((short)(sourceTile.X + x), (short)(sourceTile.Y + y), (short)(sourceTile.Z + z), autoCreate);
+                        if (tile != null)
+                            result.Add(tile);
+                    }
+
+
+            return result;
+        }
+
         #endregion
 
         public virtual void Update()
