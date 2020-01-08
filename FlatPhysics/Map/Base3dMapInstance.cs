@@ -19,7 +19,7 @@ namespace FlatPhysics.Map
 
         public static ulong GetTileId(short x, short y, short z)
         {
-            return (ulong)(ushort)y << 32 | (ulong)(ushort)x << 16 | (ulong)(ushort)z;
+            return (ulong)(ushort)z << 32 | (ulong)(ushort)x << 16 | (ulong)(ushort)y;
         }
 
         public int TileSize
@@ -242,30 +242,23 @@ namespace FlatPhysics.Map
         /// <returns></returns>
         public ICollection<TMapTile> GetNearestTiles(TMapTile sourceTile, bool autoCreate)
         {
-            List<TMapTile> result = new List<TMapTile>(27);
-
-            for (short z = -1; z <= 1; z++)
-                for (short y = -1; y <= 1; y++)
-                    for (short x = -1; x <= 1; x++)
-                    {
-                        TMapTile tile = GetTile((short)(sourceTile.X + x), (short)(sourceTile.Y + y), (short)(sourceTile.Z + z), autoCreate);
-                        if (tile != null)
-                            result.Add(tile);
-                    }
-
-
-            return result;
+            return GetTiles(sourceTile.X, sourceTile.Y, sourceTile.Z, 1, autoCreate);
         }
 
         public ICollection<TMapTile> GetTiles(TMapTile sourceTile, int range, bool autoCreate)
         {
-            List<TMapTile> result = new List<TMapTile>(27);
+            return GetTiles(sourceTile.X, sourceTile.Y, sourceTile.Z, range, autoCreate);
+        }
+
+        public ICollection<TMapTile> GetTiles(short tilex, short tiley, short tilez, int range, bool autoCreate)
+        {
+            List<TMapTile> result = new List<TMapTile>((range + 1) * (range + 1) * (range + 1) * 8);
 
             for (int z = -range; z <= range; z++)
                 for (int y = -range; y <= range; y++)
                     for (int x = -range; x <= range; x++)
                     {
-                        TMapTile tile = GetTile((short)(sourceTile.X + x), (short)(sourceTile.Y + y), (short)(sourceTile.Z + z), autoCreate);
+                        TMapTile tile = GetTile((short)(tilex + x), (short)(tiley + y), (short)(tilez + z), autoCreate);
                         if (tile != null)
                             result.Add(tile);
                     }
@@ -274,6 +267,51 @@ namespace FlatPhysics.Map
             return result;
         }
 
+        public ICollection<TMapTile> GetTiles(float x, float y, float z, float range, bool autoCreate)
+        {
+            short fromX = (short)Mathf.Floor((x - range) / m_tileSize);
+            short fromY = (short)Mathf.Floor((y - range) / m_tileSize);
+            short fromZ = (short)Mathf.Floor((z - range) / m_tileSize);
+            short toX = (short)Mathf.Ceiling((x + range) / m_tileSize);
+            short toY = (short)Mathf.Ceiling((y + range) / m_tileSize);
+            short toZ = (short)Mathf.Ceiling((z + range) / m_tileSize);
+
+            List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1) * (toZ - fromZ + 1));
+
+            for (int tilez = fromZ; tilez <= toZ; tilez++)
+                for (int tiley = fromY; tiley <= toY; tiley++)
+                    for (int tilex = fromX; tilex <= toX; tilex++)
+                    {
+                        TMapTile tile = GetTile((short)tilex, (short)tiley, (short)tilez, autoCreate);
+                        if (tile != null)
+                            result.Add(tile);
+                    }
+
+            return result;
+        }
+
+        public ICollection<TMapTile> GetTiles(float x, float y, float z, float rangex, float rangey, float rangez, bool autoCreate)
+        {
+            short fromX = (short)Mathf.Floor((x - rangex) / m_tileSize);
+            short fromY = (short)Mathf.Floor((y - rangey) / m_tileSize);
+            short fromZ = (short)Mathf.Floor((z - rangez) / m_tileSize);
+            short toX = (short)Mathf.Ceiling((x + rangex) / m_tileSize);
+            short toY = (short)Mathf.Ceiling((y + rangey) / m_tileSize);
+            short toZ = (short)Mathf.Ceiling((z + rangez) / m_tileSize);
+
+            List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1) * (toZ - fromZ + 1));
+
+            for (int tilez = fromZ; tilez <= toZ; tilez++)
+                for (int tiley = fromY; tiley <= toY; tiley++)
+                    for (int tilex = fromX; tilex <= toX; tilex++)
+                    {
+                        TMapTile tile = GetTile((short)tilex, (short)tiley, (short)tilez, autoCreate);
+                        if (tile != null)
+                            result.Add(tile);
+                    }
+
+            return result;
+        }
         #endregion
 
         public virtual void Update()
