@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Numerics;
 
 namespace FlatPhysics.Map
 {
@@ -9,6 +8,7 @@ namespace FlatPhysics.Map
 
         private readonly IDictionary<ulong, TMapTile> m_tiles = new Dictionary<ulong, TMapTile>();
         private readonly IDictionary<ulong, TMapTile> m_toCheckRemove = new Dictionary<ulong, TMapTile>();
+
         private readonly int m_tileSize;
         private readonly int m_halfTileSize;
         private readonly int m_tileExpireTime;
@@ -57,11 +57,6 @@ namespace FlatPhysics.Map
         {
             return m_tiles.Values;
         }
-
-        /*protected virtual TMapTile CreateTile(int x, int y)
-        {
-            return new TMapTile(this, x, y);
-        }*/
 
         protected abstract TMapTile CreateTile(int x, int y);
 
