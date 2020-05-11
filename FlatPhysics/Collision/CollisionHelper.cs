@@ -399,7 +399,6 @@ namespace FlatPhysics.Collision
             else
             {
                 Vector2 faceCenter =
-                    //(v1 + v2) / 2;
                     (v1 * u1 + v2 * u2) / (u1 + u2);
 
                 //if (Vector2.DistanceSquared(anotherPoint, faceCenter) > anotherRadius * anotherRadius)
@@ -687,28 +686,14 @@ namespace FlatPhysics.Collision
                             List<Vector2> collisionPoints = new List<Vector2>(count);
                             List<Vector2> collisionNormals = new List<Vector2>(count);
 
-                            /*float dist = 0;
-                            Vector2 point = Vector2.Zero;
-                            Vector2 normal = Vector2.Zero;
-    */
                             foreach (CollisionResult collision in collisionList)
                             {
-                                /* for (int i = 0; i < collision.Points.Length; i++)
-                                 {
-                                     float normalDist = collision.Normals[i].LengthSqrd();
-                                     if (normalDist > dist)
-                                     {
-                                         normalDist = dist;
-                                         point = collision.Points[i];
-                                         normal = collision.Normals[i];
-                                     }
-                                 }*/
                                 collisionPoints.AddRange(collision.Points);
                                 collisionNormals.AddRange(collision.Normals);
                             }
 
                             result = new CollisionResult(collisionPoints.ToArray(), collisionNormals.ToArray());
-                            //result = new CollisionResult(point, normal);
+
                             return true;
                         }
                     }
@@ -758,7 +743,7 @@ namespace FlatPhysics.Collision
                     }
                     break;
 
-                // Only one check left here - all other cases will be guaranteed checked above. I.e. Point/Polygon will become Polugon/Point
+                // Only one check left here - all other cases will be guaranteed checked above. I.e. Point/Polygon will become Polygon/Point
                 case ShapeType.Point:
                     {
                         if (another.ShapeType == ShapeType.Point)

@@ -152,6 +152,11 @@ namespace FlatPhysics.Collision
         {
             return t.MulR(v);
         }
+
+        public static Vector2 MulTR(Transform t, Vector2 v)
+        {
+            return t.MulTR(v);
+        }
     }
 }
 

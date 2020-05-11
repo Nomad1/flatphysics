@@ -4,6 +4,12 @@ using RunServer.Common;
 using System.Numerics;
 #endif
 
+#if USE_MATHF
+using Math = FlatPhysics.Mathf;
+#else
+using Math = System.Math;
+#endif
+
 namespace FlatPhysics.Collision
 {
     public class CircleShape : BaseShape
@@ -76,7 +82,7 @@ namespace FlatPhysics.Collision
             }
 
             // Find the point of intersection of the line with the circle.
-            float a = -(c + (float)System.Math.Sqrt(sigma)); //TODO: Move to mathhelper?
+            float a = -(c + (float)Math.Sqrt(sigma)); //TODO: Move to mathhelper?
 
             // Is the intersection point on the segment?
             if (0.0f <= a && a <= rr)
