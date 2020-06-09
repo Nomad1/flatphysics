@@ -72,9 +72,12 @@
     <Compile Include="Map\ObjectArray.cs" />
     <Compile Include="Mathf.cs" />
     <Compile Include="MoveMathVector.cs" />
+    <Compile Include="Map\Base3dMapInstance.cs" />
+    <Compile Include="Map\Base3dMapTile.cs" />
+    <Compile Include="Map\IBaseMapObject.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RunMobile\RunMobile.iOS.csproj">
+    <ProjectReference Include="..\..\RunMobile\RunMobile\RunMobile.iOS.csproj">
       <Project>{B39E52FD-8AE5-45AF-AD95-C468F5644D4A}</Project>
       <Name>RunMobile.iOS</Name>
     </ProjectReference>
