@@ -167,7 +167,7 @@ namespace FlatPhysics.Map
             }
 
             float radiusSq = radius * radius;
-            List<TMapTile> result = new List<TMapTile>();
+            List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1));
 
             for (int tileX = fromX; tileX <= toX; tileX++)
                 for (int tileY = fromY; tileY <= toY; tileY++)

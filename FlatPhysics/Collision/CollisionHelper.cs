@@ -172,25 +172,40 @@ namespace FlatPhysics.Collision
             if (Vector2.DistanceSquared(anotherPoint, new Vector2(x, y)) > oneRadius * oneRadius)
                 return false;
 
-            float[] distances =
-            {
-                            Math.Abs(-anotherWidth/2 - x), // left
-                            Math.Abs(anotherHeight/2 - y), // top
-                            Math.Abs(anotherWidth/2 - x), // right
-                            Math.Abs(-anotherHeight/2 - y), // bottom
-            };
+            float left = Math.Abs(-anotherWidth / 2 - x); // left
+            float top = Math.Abs(anotherHeight / 2 - y); // top
+            float right = Math.Abs(anotherWidth / 2 - x); // right
+            float bottom = Math.Abs(-anotherHeight / 2 - y); // bottom
 
-            int index = -1;
-            float dist = float.MaxValue;
+            int index = 0;
+            float dist = left;
 
-            for (int i = 0; i < distances.Length; i++)
+            if (top < dist)
             {
-                if (distances[i] < dist)
-                {
-                    dist = distances[i];
-                    index = i;
-                }
+                dist = top;
+                index = 1;
             }
+
+            if (right < dist)
+            {
+                dist = right;
+                index = 2;
+            }
+
+            if (bottom < dist)
+            {
+                dist = bottom;
+                index = 3;
+            }
+
+            //for (int i = 0; i < distances.Length; i++)
+            //{
+            //    if (distances[i] < dist)
+            //    {
+            //        dist = distances[i];
+            //        index = i;
+            //    }
+            //}
 
             Vector2 normal = anotherTransform.MulR(RectangleShape.RectangleNormals[index]) * dist;
 
@@ -528,12 +543,21 @@ namespace FlatPhysics.Collision
 #endif
         }
 
+        private static Vector2[] s_cachePoints = null;
+        private static Vector2[] s_cacheNormals = null;
+
         internal static bool CollidePolygons(Vector2[] one, Vector2[] oneNormals, Transform oneTransform, Vector2[] nanotherPoints, Vector2[] nanotherNormals, Transform anotherTransform, out CollisionResult result)
         {
             result = default(CollisionResult);
 
-            Vector2[] anotherPoints = new Vector2[nanotherPoints.Length];
-            Vector2[] anotherNormals = new Vector2[nanotherNormals.Length];
+            if (s_cachePoints == null || nanotherPoints.Length != s_cachePoints.Length)
+            {
+                s_cachePoints = new Vector2[nanotherPoints.Length];
+                s_cacheNormals = new Vector2[nanotherNormals.Length];
+            }
+
+            Vector2[] anotherPoints = s_cachePoints;
+            Vector2[] anotherNormals = s_cacheNormals;
 
             for (int i = 0; i < anotherPoints.Length; i++)
             {
