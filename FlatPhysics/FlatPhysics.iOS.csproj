@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug.iOS</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DEBUG;USE_NUMERICS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -47,6 +47,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -81,6 +83,9 @@
       <Project>{B39E52FD-8AE5-45AF-AD95-C468F5644D4A}</Project>
       <Name>RunMobile.iOS</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

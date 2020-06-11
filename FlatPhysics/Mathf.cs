@@ -12,7 +12,9 @@ namespace FlatPhysics
 
         public const float PI = 3.14159265358979323846f;
         public const float TwoPI = 6.283185307179586f;
+        public const float InvTwoPI = 0.1591549f;
         public const float HalfPI = 1.57079632679489661923f;
+        public const float ThreeHalfPI = 4.7123889f;
 
         public const float Deg2Rad = 0.017453293f;
         public const float Rad2Deg = 57.29577793f;
@@ -155,18 +157,76 @@ namespace FlatPhysics
             return FastInvSqrt(value);
 #endif
         }
+        
+        // ported from https://github.com/divideconcept/FastTrigo/blob/master/fasttrigo.cpp
+        private static float ft_cos_32s(float x)
+        {
+            const float c1= 0.99940307f;
+            const float c2=-0.49558072f;
+            const float c3= 0.03679168f;
+            float x2;      // The input argument squared
+            x2=x * x;
+            return (c1 + x2*(c2 + c3 * x2));
+        }
+        
+        private static float ft_cos(float angle)
+        {
+            //clamp to the range 0..2pi
+            angle=angle-Floor(angle*InvTwoPI)*TwoPI;
+            angle=angle>0.0f?angle:-angle;
+
+            if(angle<HalfPI) return ft_cos_32s(angle);
+            if(angle<PI) return -ft_cos_32s(PI-angle);
+            if(angle<ThreeHalfPI) return -ft_cos_32s(angle-PI);
+            return ft_cos_32s(TwoPI-angle);
+        }
+        
+        private static float ft_sin(float angle)
+        {
+            return ft_cos(HalfPI - angle);
+        }
+
+        private static void ft_sincos(float angle, out float sin, out float cos)
+        {
+            //clamp to the range 0..2pi
+            angle = angle - Floor(angle * InvTwoPI) * TwoPI;
+            float sinmultiplier = angle > 0.0f && angle < PI ? 1.0f : -1.0f;
+            angle = angle > 0.0f ? angle : -angle;
+
+            if (angle < HalfPI)
+            {
+                cos = ft_cos_32s(angle);
+                sin = sinmultiplier * Sqrt(1.0f - cos * cos);
+                return;
+            }
+
+            if (angle < PI)
+            {
+                cos = -ft_cos_32s(PI - angle);
+                sin = sinmultiplier * Sqrt(1.0f - cos * cos);
+                return;
+            }
+
+            if (angle < ThreeHalfPI)
+            {
+                cos = -ft_cos_32s(angle - PI);
+                sin = sinmultiplier * Sqrt(1.0f - cos * cos);
+                return;
+            }
+
+            cos = ft_cos_32s(TwoPI - angle);
+            sin = sinmultiplier * Sqrt(1.0f - cos * cos);
+        }
 
         public static void SinCos(float angle, out float s, out float c)
         {
-#if true || PRECISE
+#if PRECISE
             s = (float)System.Math.Sin(angle);
             c = (float)System.Math.Cos(angle);
 #else
-            s = Sin(angle);
-            c = Cos(angle);
+            ft_sincos(angle, out s, out c);
 #endif
         }
-
         /// <summary>
         /// Sine of the specified angle.
         /// </summary>
@@ -176,7 +236,7 @@ namespace FlatPhysics
         {
 #if PRECISE
             return (float)System.Math.Sin(angle);
-#else
+#elif OLD
             double x;
             double xx;
             double ret;
@@ -202,6 +262,8 @@ namespace FlatPhysics
             ret -= 4.240664814288337e-13 * x;
 
             return (float)ret;
+#else
+            return ft_sin(angle);
 #endif
         }
 
@@ -214,11 +276,13 @@ namespace FlatPhysics
         {
 #if PRECISE
             return (float)System.Math.Cos(angle);
-#else
+#elif OLD
             return Sin(angle + HalfPI);
+#else
+            return ft_cos(angle);
 #endif
         }
-
+        
         public static float Acos(float x)
         {
 #if PRECISE
