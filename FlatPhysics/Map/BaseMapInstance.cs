@@ -1,7 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace FlatPhysics.Map
 {
+    [StructLayout(LayoutKind.Explicit)]
+    internal struct IdUnion
+    {
+        [FieldOffset(0)]
+        private int X;
+        [FieldOffset(4)]
+        private int Y;
+        [FieldOffset(0)]
+        public ulong ID;
+
+        public IdUnion(int x, int y)
+            : this()
+        {
+            X = x;
+            Y = y;
+        }
+    }
+
     public abstract class BaseMapInstance<TMapTile> where TMapTile : BaseMapTile<TMapTile>
     {
         public const int DefaultTileExpireTime = 30000;
@@ -18,22 +37,25 @@ namespace FlatPhysics.Map
             return GetTileId(Mathf.Floor(x / tileSize), Mathf.Floor(y / tileSize));
         }
 
-        [System.Obsolete]
-        public static ulong SafeGetTileId(int x, int y)
-        {
-            byte[] xBytes = System.BitConverter.GetBytes(x);
-            byte[] yBytes = System.BitConverter.GetBytes(y);
+        
 
-            byte[] resultBytes = new byte[8];
-            System.Buffer.BlockCopy(xBytes, 0, resultBytes, 0, 4);
-            System.Buffer.BlockCopy(yBytes, 0, resultBytes, 4, 4);
+        //[System.Obsolete]
+        //public static ulong SafeGetTileId(int x, int y)
+        //{
+        //    byte[] xBytes = System.BitConverter.GetBytes(x);
+        //    byte[] yBytes = System.BitConverter.GetBytes(y);
 
-            return System.BitConverter.ToUInt64(resultBytes, 0);
-        }
+        //    byte[] resultBytes = new byte[8];
+        //    System.Buffer.BlockCopy(xBytes, 0, resultBytes, 0, 4);
+        //    System.Buffer.BlockCopy(yBytes, 0, resultBytes, 4, 4);
+
+        //    return System.BitConverter.ToUInt64(resultBytes, 0);
+        //}
 
         public static ulong GetTileId(int x, int y)
         {
-            return (ulong)(uint)y << 32 | (ulong)(uint)x;
+            return new IdUnion(x, y).ID;
+            //return (ulong)(uint)y << 32 | (ulong)(uint)x;
         }
 
         public int TileSize
