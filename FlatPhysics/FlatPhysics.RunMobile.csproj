@@ -48,6 +48,15 @@
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Modern|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Release.Modern\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <TargetFrameworkProfile />
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <ProjectReference Include="..\..\RunMobile\RunMobile\RunMobile.csproj">
