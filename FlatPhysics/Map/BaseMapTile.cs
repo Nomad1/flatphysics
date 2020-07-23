@@ -55,7 +55,7 @@ namespace FlatPhysics.Map
             m_map = map;
             m_x = x;
             m_y = y;
-            m_id = BaseMapInstance<TMapTile>.GetTileId(x, y);
+            m_id = BaseMapInstance<TMapTile>.GetTileId(map.MapId, x, y);
             Advance();
         }
 

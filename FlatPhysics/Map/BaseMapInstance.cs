@@ -7,17 +7,20 @@ namespace FlatPhysics.Map
     internal struct IdUnion
     {
         [FieldOffset(0)]
-        private int X;
+        private short X;
+        [FieldOffset(2)]
+        private short Y;
         [FieldOffset(4)]
-        private int Y;
+        private ushort MapID;
         [FieldOffset(0)]
         public ulong ID;
 
-        public IdUnion(int x, int y)
+        public IdUnion(uint mapId, int x, int y)
             : this()
         {
-            X = x;
-            Y = y;
+            MapID = (ushort)mapId;
+            X = (short)x;
+            Y = (short)y;
         }
     }
 
@@ -31,31 +34,16 @@ namespace FlatPhysics.Map
         private readonly int m_tileSize;
         private readonly int m_halfTileSize;
         private readonly int m_tileExpireTime;
+        private readonly uint m_mapId;
 
-        public static ulong GetTileId(float x, float y, float tileSize)
+        public static ulong GetTileId(uint mapId, float x, float y, float tileSize)
         {
-            return GetTileId(Mathf.Floor(x / tileSize), Mathf.Floor(y / tileSize));
+            return GetTileId(mapId, Mathf.Floor(x / tileSize), Mathf.Floor(y / tileSize));
         }
 
-        
-
-        //[System.Obsolete]
-        //public static ulong SafeGetTileId(int x, int y)
-        //{
-        //    byte[] xBytes = System.BitConverter.GetBytes(x);
-        //    byte[] yBytes = System.BitConverter.GetBytes(y);
-
-        //    byte[] resultBytes = new byte[8];
-        //    System.Buffer.BlockCopy(xBytes, 0, resultBytes, 0, 4);
-        //    System.Buffer.BlockCopy(yBytes, 0, resultBytes, 4, 4);
-
-        //    return System.BitConverter.ToUInt64(resultBytes, 0);
-        //}
-
-        public static ulong GetTileId(int x, int y)
+        public static ulong GetTileId(uint mapId, int x, int y)
         {
-            return new IdUnion(x, y).ID;
-            //return (ulong)(uint)y << 32 | (ulong)(uint)x;
+            return new IdUnion(mapId, x, y).ID;
         }
 
         public int TileSize
@@ -68,8 +56,14 @@ namespace FlatPhysics.Map
             get { return m_tileExpireTime; }
         }
 
-        protected BaseMapInstance(int tileSize, int tileExpireTime = DefaultTileExpireTime)
+        public uint MapId
         {
+            get { return m_mapId; }
+        }
+
+        protected BaseMapInstance(uint mapId, int tileSize, int tileExpireTime = DefaultTileExpireTime)
+        {
+            m_mapId = mapId;
             m_tileSize = tileSize;
             m_halfTileSize = tileSize / 2;
             m_tileExpireTime = tileExpireTime;
@@ -116,7 +110,7 @@ namespace FlatPhysics.Map
 
         protected TMapTile GetTile(int tilex, int tiley, bool autoCreate)
         {
-            ulong id = GetTileId(tilex, tiley);
+            ulong id = GetTileId(m_mapId, tilex, tiley);
 
             TMapTile result;
             if (m_tiles.TryGetValue(id, out result))
@@ -133,7 +127,7 @@ namespace FlatPhysics.Map
             int tilex = Mathf.Floor(x / m_tileSize);
             int tiley = Mathf.Floor(y / m_tileSize);
 
-            ulong id = GetTileId(tilex, tiley);
+            ulong id = GetTileId(m_mapId, tilex, tiley);
 
             TMapTile result;
             if (m_tiles.TryGetValue(id, out result))
