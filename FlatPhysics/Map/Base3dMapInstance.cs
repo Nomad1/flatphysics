@@ -295,9 +295,9 @@ namespace FlatPhysics.Map
             short fromX = (short)Mathf.Floor((x - range) / m_tileSize);
             short fromY = (short)Mathf.Floor((y - range) / m_tileSize);
             short fromZ = (short)Mathf.Floor((z - range) / m_tileSize);
-            short toX = (short)Mathf.Ceiling((x + range) / m_tileSize);
-            short toY = (short)Mathf.Ceiling((y + range) / m_tileSize);
-            short toZ = (short)Mathf.Ceiling((z + range) / m_tileSize);
+            short toX = (short)Mathf.Floor((x + range) / m_tileSize);
+            short toY = (short)Mathf.Floor((y + range) / m_tileSize);
+            short toZ = (short)Mathf.Floor((z + range) / m_tileSize);
 
             List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1) * (toZ - fromZ + 1));
 
@@ -318,9 +318,9 @@ namespace FlatPhysics.Map
             short fromX = (short)Mathf.Floor((x - rangex) / m_tileSize);
             short fromY = (short)Mathf.Floor((y - rangey) / m_tileSize);
             short fromZ = (short)Mathf.Floor((z - rangez) / m_tileSize);
-            short toX = (short)Mathf.Ceiling((x + rangex) / m_tileSize);
-            short toY = (short)Mathf.Ceiling((y + rangey) / m_tileSize);
-            short toZ = (short)Mathf.Ceiling((z + rangez) / m_tileSize);
+            short toX = (short)Mathf.Floor((x + rangex) / m_tileSize);
+            short toY = (short)Mathf.Floor((y + rangey) / m_tileSize);
+            short toZ = (short)Mathf.Floor((z + rangez) / m_tileSize);
 
             List<TMapTile> result = new List<TMapTile>((toX - fromX + 1) * (toY - fromY + 1) * (toZ - fromZ + 1));
 
