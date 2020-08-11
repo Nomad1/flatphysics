@@ -90,9 +90,21 @@ namespace FlatPhysics
         /// <param name="damping">Damping.</param>
         public static float GetDampingDistance(float velocity, float maxVelocity, float damping)
         {
+            return GetDampingTime(velocity, maxVelocity, damping) * maxVelocity;
+        }
+        
+        /// <summary>
+        /// Calculates the time untill full stop with specified speed and damping
+        /// </summary>
+        /// <returns>The damping time.</returns>
+        /// <param name="velocity">Velocity.</param>
+        /// <param name="maxVelocity">Max velocity.</param>
+        /// <param name="damping">Damping.</param>
+        public static float GetDampingTime(float velocity, float maxVelocity, float damping)
+        {
             float speedPct = velocity / maxVelocity;
 
-            return maxVelocity * maxVelocity * (speedPct - (float)Math.Log(1 + speedPct)) / Math.Abs(damping);
+            return maxVelocity * (speedPct - (float)Math.Log(1 + speedPct)) / Math.Abs(damping);
         }
 
         /// <summary>
