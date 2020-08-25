@@ -9,39 +9,39 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
     <AssemblyName>FlatPhysics.RunMobile</AssemblyName>
-    <DefineConstants>USE_MATHF</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Debug.RunMobile</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants>DEBUG;USE_MATHF</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Release.RunMobile</OutputPath>
+    <DefineConstants>USE_MATHF</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
     <OutputPath>bin\Debug.RunMobile.Numerics\</OutputPath>
+    <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
     <OutputPath>bin\Release.RunMobile.Numerics\</OutputPath>
+    <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Optimize>true</Optimize>
@@ -51,8 +51,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Modern|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Release.Modern\</OutputPath>
+    <DefineConstants>USE_MATHF</DefineConstants>
     <Optimize>true</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <ErrorReport>prompt</ErrorReport>

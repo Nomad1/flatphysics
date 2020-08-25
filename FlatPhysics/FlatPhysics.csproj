@@ -9,7 +9,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
     <AssemblyName>FlatPhysics</AssemblyName>
-    <DefineConstants>USE_MATHF</DefineConstants>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">

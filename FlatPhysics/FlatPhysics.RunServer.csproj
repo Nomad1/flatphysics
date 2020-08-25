@@ -13,7 +13,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug.RunServer</OutputPath>
-    <DefineConstants>DEBUG;RUNSERVER</DefineConstants>
+    <DefineConstants>DEBUG;RUNSERVER;USE_MATHF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -27,7 +27,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>RUNSERVER</DefineConstants>
+    <DefineConstants>RUNSERVER;USE_MATHF</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -51,6 +51,7 @@
     <Compile Include="Collision\BaseShape.cs" />
     <Compile Include="Collision\ComplexShape.cs" />
     <Compile Include="Collision\Fixture.cs" />
+    <Compile Include="Mathf.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
