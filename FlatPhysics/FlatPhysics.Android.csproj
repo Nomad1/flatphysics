@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics.Android</RootNamespace>
     <AssemblyName>FlatPhysics.Android</AssemblyName>
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
