@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
     <AssemblyName>FlatPhysics.RunServer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,9 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="RunServer.Common">
-      <HintPath>..\packages\RunServer.Common.2.6.5.2\lib\net461\RunServer.Common.dll</HintPath>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\SpaceAdventure.Server\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="System.CodeDom">
+      <HintPath>..\..\SpaceAdventure.Server\packages\System.CodeDom.4.7.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +63,6 @@
     <Folder Include="Collision\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="RunServer.Common" Version="2.7.0.4" />
   </ItemGroup>
 </Project>
