@@ -9,22 +9,23 @@
     <RootNamespace>FlatPhysics</RootNamespace>
     <AssemblyName>FlatPhysics.RunMobile</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <BaseIntermediateOutputPath>obj.RunMobile</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Debug.RunMobile</OutputPath>
-    <IntermediateOutputPath>obj\Debug.RunMobile</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunMobile\Debug.RunMobile</IntermediateOutputPath>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants>DEBUG;USE_MATHF</DefineConstants>
+    <DefineConstants>DEBUG;_USE_MATHF</DefineConstants>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Release.RunMobile</OutputPath>
-    <IntermediateOutputPath>obj\Release.RunMobile</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunMobile\Release.RunMobile</IntermediateOutputPath>
     <DefineConstants>USE_MATHF</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
@@ -34,7 +35,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
     <OutputPath>bin\Debug.RunMobile.Numerics\</OutputPath>
-    <IntermediateOutputPath>obj\Debug.RunMobile.Numerics</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunMobile\Debug.RunMobile.Numerics</IntermediateOutputPath>
     <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -44,7 +45,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
     <OutputPath>bin\Release.RunMobile.Numerics\</OutputPath>
-    <IntermediateOutputPath>obj\Release.RunMobile.Numerics\</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunMobile\Release.RunMobile.Numerics\</IntermediateOutputPath>
     <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -55,7 +56,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Modern|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Release.Modern\</OutputPath>
-    <IntermediateOutputPath>obj\Release.Modern\</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunMobile\Release.Modern\</IntermediateOutputPath>
     <DefineConstants>USE_MATHF</DefineConstants>
     <Optimize>true</Optimize>
     <TargetFrameworkProfile />

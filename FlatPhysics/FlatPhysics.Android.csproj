@@ -26,7 +26,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release.Android</OutputPath>
-    <DefineConstants>__ANDROID__;__MOBILE__;_USE_NUMERICS;USE_MATHF</DefineConstants>
+    <DefineConstants>__ANDROID__;__MOBILE__;_USE_NUMERICS;_USE_MATHF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>

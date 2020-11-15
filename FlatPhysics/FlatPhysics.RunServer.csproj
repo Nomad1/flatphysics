@@ -8,14 +8,15 @@
     <RootNamespace>FlatPhysics</RootNamespace>
     <AssemblyName>FlatPhysics.RunServer</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <BaseIntermediateOutputPath>obj.RunServer</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug.RunServer</OutputPath>
-    <IntermediateOutputPath>obj\Debug.RunServer</IntermediateOutputPath>
-    <DefineConstants>DEBUG;RUNSERVER;USE_MATHF</DefineConstants>
+    <IntermediateOutputPath>obj.RunServer\Debug</IntermediateOutputPath>
+    <DefineConstants>DEBUG;RUNSERVER;_USE_MATHF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -25,7 +26,7 @@
     <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release.RunServer</OutputPath>
-    <IntermediateOutputPath>obj\Release.RunServer</IntermediateOutputPath>
+    <IntermediateOutputPath>obj.RunServer\Release</IntermediateOutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
