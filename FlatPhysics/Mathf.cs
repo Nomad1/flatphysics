@@ -1,6 +1,5 @@
-﻿//#if __IOS__
-//#define PRECISE   // uncomment this one to use System.Math instead
-//#endif
+﻿//#define PRECISE   // uncomment this one to use System.Math instead
+#define FAILSAFE    // more orthodox Sin/Cos
 
 namespace FlatPhysics
 {
@@ -29,7 +28,8 @@ namespace FlatPhysics
 
         #endregion
 
-        #region Fast Methods
+#if !PRECISE
+#region Fast Methods
 
         private static float FastInvSqrt(float x)
         {
@@ -128,7 +128,8 @@ namespace FlatPhysics
             return 0.69314718f * FastLog2(x);
         }
 
-        #endregion
+#endregion
+#endif
 
         #region Mathematics
 
@@ -162,10 +163,7 @@ namespace FlatPhysics
 
         public static void SinCos(float angle, out float s, out float c)
         {
-#if PRECISE
-            s = (float)System.Math.Sin(angle);
-            c = (float)System.Math.Cos(angle);
-#elif true || FAILSAFE
+#if PRECISE || FAILSAFE
             if (angle == 0.0f)
             {
                 s = 0.0f;
@@ -349,9 +347,9 @@ namespace FlatPhysics
 #endif
         }
 
-        #endregion
+#endregion
 
-        #region Helpers
+#region Helpers
 
         public static float NormalizeAngle(float angle)
         {
@@ -451,7 +449,7 @@ namespace FlatPhysics
             return diff <= Max(v1, v2) * epsilon;
         }
 
-        #endregion
+#endregion
     }
 }
 

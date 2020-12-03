@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>RUNSERVER;USE_MATHF</DefineConstants>
+    <DefineConstants>RUNSERVER;USE_MATHF;PRECISE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
