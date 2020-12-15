@@ -27,7 +27,7 @@
     <IOSDebuggerPort>16654</IOSDebuggerPort>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchVerbosity></MtouchVerbosity>
-    <MtouchLink></MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchHttpClientHandler></MtouchHttpClientHandler>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics.Android</RootNamespace>
     <AssemblyName>FlatPhysics.Android</AssemblyName>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +23,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release.Android</OutputPath>
     <DefineConstants>__ANDROID__;__MOBILE__;_USE_NUMERICS;_USE_MATHF</DefineConstants>
