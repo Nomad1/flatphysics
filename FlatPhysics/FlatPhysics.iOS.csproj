@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Debug.iOS</OutputPath>
-    <DefineConstants>DEBUG;__IOS__;__MOBILE__;_USE_NUMERICS</DefineConstants>
+    <DefineConstants>__UNIFIED__;DEBUG;__IOS__;__MOBILE__;_USE_NUMERICS;USE_MATHF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
@@ -32,10 +32,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release.iOS</OutputPath>
-    <DefineConstants>__IOS__;__MOBILE__;_USE_NUMERICS</DefineConstants>
+    <DefineConstants>__UNIFIED__;__IOS__;__MOBILE__;_USE_NUMERICS;USE_MATHF</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer</CodesignKey>
