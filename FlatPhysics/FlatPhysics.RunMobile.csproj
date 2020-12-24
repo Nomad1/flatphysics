@@ -26,7 +26,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Release.RunMobile</OutputPath>
     <IntermediateOutputPath>obj.RunMobile\Release.RunMobile</IntermediateOutputPath>
-    <DefineConstants>USE_MATHF;PRECISE</DefineConstants>
+    <DefineConstants>_USE_MATHF;PRECISE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
@@ -104,7 +104,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Map\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
