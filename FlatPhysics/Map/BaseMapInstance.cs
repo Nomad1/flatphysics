@@ -167,7 +167,7 @@ namespace FlatPhysics.Map
             return result;
         }
 
-        public ICollection<TMapTile> GetTiles(float x, float y, float radius, bool autoCreate) // circle
+        public TMapTile [] GetTiles(float x, float y, float radius, bool autoCreate) // circle
         {
             int fromX = Mathf.Floor((x - radius) / m_tileSize);
             int fromY = Mathf.Floor((y - radius) / m_tileSize);
@@ -207,7 +207,7 @@ namespace FlatPhysics.Map
                     }
                 }
 
-            return result;
+            return result.ToArray();
         }
 
         public IBaseMapObject<TMapTile> GetObject(TMapTile sourceTile, ulong id)
