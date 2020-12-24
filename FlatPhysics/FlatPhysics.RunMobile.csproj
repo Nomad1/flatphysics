@@ -18,7 +18,7 @@
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants>DEBUG;_USE_MATHF</DefineConstants>
+    <DefineConstants>DEBUG;USE_MATHF</DefineConstants>
     <TargetFrameworkProfile />
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
@@ -26,7 +26,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <OutputPath>bin\Release.RunMobile</OutputPath>
     <IntermediateOutputPath>obj.RunMobile\Release.RunMobile</IntermediateOutputPath>
-    <DefineConstants>_USE_MATHF;PRECISE</DefineConstants>
+    <DefineConstants>USE_MATHF;_PRECISE</DefineConstants>
     <WarningLevel>4</WarningLevel>
     <Optimize>true</Optimize>
     <Prefer32Bit>false</Prefer32Bit>
