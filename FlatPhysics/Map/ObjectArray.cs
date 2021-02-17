@@ -3,7 +3,7 @@
 namespace FlatPhysics.Map
 {
     /// <summary>
-    /// Simple collection that uses dictionary to store IGuidable objects and
+    /// Simple typed collection that uses dictionary to store IGuidable objects and
     /// also have an array for fast (and non thread-safe!) access.
     /// </summary>
     public class ObjectArray<TObject> where TObject : IGuidable

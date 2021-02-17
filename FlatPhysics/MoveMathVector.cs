@@ -12,6 +12,9 @@ using Math = System.Math;
 
 namespace FlatPhysics
 {
+    /// <summary>
+    /// This class is a helper for movement mechanics used in Project Amalthea. It's of little to no use in other projects
+    /// </summary>
     public static class MoveMathVector
     {
         public const float Epsilon = 1E-4f;
@@ -127,7 +130,6 @@ namespace FlatPhysics
         }
 
 #if RUNSERVER
-        
         private static float s_oneMinusLog2 = (1 - (float)Math.Log(2.0f));
         
         /// <summary>

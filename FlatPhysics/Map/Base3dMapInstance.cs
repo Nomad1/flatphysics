@@ -1,29 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace FlatPhysics.Map
 {
-    [StructLayout(LayoutKind.Explicit)]
-    internal struct IdUnion3
-    {
-        [FieldOffset(0)]
-        public short X;
-        [FieldOffset(2)]
-        public short Y;
-        [FieldOffset(4)]
-        public short Z;
-        [FieldOffset(0)]
-        public ulong ID;
-
-        public IdUnion3(short x, short y, short z)
-            : this()
-        {
-            X = x;
-            Y = y;
-            Z = z;
-        }
-    }
-
     public abstract class Base3dMapInstance<TMapTile> where TMapTile : Base3dMapTile<TMapTile>
     {
         public const int DefaultTileExpireTime = 30000;
@@ -41,7 +19,7 @@ namespace FlatPhysics.Map
 
         public static ulong GetTileId(short x, short y, short z)
         {
-            return new IdUnion3(x,y,z).ID;
+            return new IdUnion(x, y, z).Id;
             //return (ulong)(ushort)z << 32 | (ulong)(ushort)x << 16 | (ulong)(ushort)y;
         }
 

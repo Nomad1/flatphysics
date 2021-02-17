@@ -3,12 +3,12 @@
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("FlatPhysics Engine")]
+[assembly: AssemblyTitle ("FlatPhysics 2D Physics Engine")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("RunServer")]
 [assembly: AssemblyProduct ("FlatPhysics Engine")]
-[assembly: AssemblyCopyright ("RunServer 2012-2019")]
+[assembly: AssemblyCopyright ("RunServer 2012-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
