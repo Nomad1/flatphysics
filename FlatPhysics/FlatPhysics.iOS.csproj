@@ -48,9 +48,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collision\BaseShape.cs" />
     <Compile Include="Collision\CircleShape.cs" />
@@ -73,11 +70,12 @@
     <Compile Include="Map\Base3dMapInstance.cs" />
     <Compile Include="Map\Base3dMapTile.cs" />
     <Compile Include="Map\IBaseMapObject.cs" />
+    <Compile Include="Map\IdUnion.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RunMobile\RunMobile\RunMobile.iOS.csproj">
-      <Project>{B39E52FD-8AE5-45AF-AD95-C468F5644D4A}</Project>
-      <Name>RunMobile.iOS</Name>
+    <ProjectReference Include="..\..\RunMobile\RunMobile.Utility\RunMobile.Utility.iOS.csproj">
+      <Project>{087E52E3-A47E-4A4B-845B-EBEB1C400F6F}</Project>
+      <Name>RunMobile.Utility.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
