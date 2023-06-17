@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -41,7 +41,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Optimize>false</Optimize>
     <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
     <OutputPath>bin\Release.RunMobile.Numerics\</OutputPath>
@@ -51,17 +52,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Optimize>true</Optimize>
     <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Modern|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release.Modern\</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Release.Modern\</IntermediateOutputPath>
-    <DefineConstants>USE_MATHF</DefineConstants>
-    <Optimize>true</Optimize>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
