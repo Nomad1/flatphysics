@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#if RUNSERVER
+using RunServer.Common;
+#else
+using RunMobile.Utility;
+#endif
+
+using System.Collections.Generic;
 
 namespace FlatPhysics.Map
 {

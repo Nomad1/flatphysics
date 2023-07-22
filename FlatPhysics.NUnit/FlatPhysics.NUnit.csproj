@@ -54,13 +54,13 @@
     <Compile Include="MyTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FlatPhysics\FlatPhysics.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlatPhysics\FlatPhysics.RunMobile.csproj">
       <Project>{59BDB480-E765-4435-8AE2-32A7846FE705}</Project>
       <Name>FlatPhysics.RunMobile</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -5,7 +5,7 @@ using System.Numerics;
 #endif
 
 #if USE_MATHF
-using Math = FlatPhysics.Mathf;
+using Math = RunMobile.Utility.Mathf;
 #else
 using Math = System.Math;
 #endif
