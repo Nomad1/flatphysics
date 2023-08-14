@@ -1,111 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
-    <ProjectGuid>{59BDB480-E765-4435-8AE2-32A7846FE705}</ProjectGuid>
-    <OutputType>Library</OutputType>
     <RootNamespace>FlatPhysics</RootNamespace>
-    <AssemblyName>FlatPhysics.RunMobile</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <BaseIntermediateOutputPath>obj.RunMobile</BaseIntermediateOutputPath>
+    <TargetFrameworks>net40;netstandard2.1;net471</TargetFrameworks>
+    <BaseIntermediateOutputPath>obj</BaseIntermediateOutputPath>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AssemblyTitle>FlatPhysics 2D Physics Engine</AssemblyTitle>
+    <Company>RunServer</Company>
+    <Product>FlatPhysics Engine</Product>
+    <Copyright>RunServer 2012-2023</Copyright>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>2.5.8.1</AssemblyVersion>
+    <FileVersion>2.5.8.1</FileVersion>
+    <Configurations>Debug;Release</Configurations>
+    <OutputPath>bin\$(Configuration)\$(Platform)</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>bin\Debug.RunMobile</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Debug.RunMobile</IntermediateOutputPath>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
-    <DefineConstants>DEBUG;USE_MATHF</DefineConstants>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <DefineConstants>DEBUG;USE_MATHF;_PRECISE</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>bin\Release.RunMobile</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Release.RunMobile</IntermediateOutputPath>
     <DefineConstants>USE_MATHF;_PRECISE</DefineConstants>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>true</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
-    <OutputPath>bin\Debug.RunMobile.Numerics\</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Debug.RunMobile.Numerics</IntermediateOutputPath>
-    <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Optimize>false</Optimize>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
-    <OutputPath>bin\Release.RunMobile.Numerics\</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Release.RunMobile.Numerics\</IntermediateOutputPath>
-    <DefineConstants>USE_NUMERICS;USE_MATHF</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Optimize>true</Optimize>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Modern|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Release.Modern\</OutputPath>
-    <IntermediateOutputPath>obj.RunMobile\Release.Modern\</IntermediateOutputPath>
-    <DefineConstants>USE_MATHF</DefineConstants>
-    <Optimize>true</Optimize>
-    <TargetFrameworkProfile />
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
-    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug.Numerics|AnyCPU'">
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Numerics|AnyCPU'">
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors" />
+    <ProjectReference Include="..\..\RunMobile\RunMobile.Utility\RunMobile.Utility.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collision\BaseShape.cs" />
-    <Compile Include="Collision\IShape.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Collision\CircleShape.cs" />
-    <Compile Include="Collision\CollisionHelper.cs" />
-    <Compile Include="Collision\CollisionResult.cs" />
-    <Compile Include="Collision\NoneShape.cs" />
-    <Compile Include="Collision\PointShape.cs" />
-    <Compile Include="Collision\PolygonShape.cs" />
-    <Compile Include="Collision\RectangleShape.cs" />
-    <Compile Include="Collision\ShapeType.cs" />
-    <Compile Include="Collision\Transform.cs" />
-    <Compile Include="MoveMathVector.cs" />
-    <Compile Include="Collision\ComplexShape.cs" />
-    <Compile Include="Collision\Fixture.cs" />
-    <Compile Include="Map\BaseMapInstance.cs" />
-    <Compile Include="Map\BaseMapTile.cs" />
-    <Compile Include="Map\ObjectArray.cs" />
-    <Compile Include="Map\IBaseMapObject.cs" />
-    <Compile Include="Map\IGuidable.cs" />
-    <Compile Include="Map\Base3dMapInstance.cs" />
-    <Compile Include="Map\Base3dMapTile.cs" />
-    <Compile Include="Map\IdUnion.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\..\RunMobile\RunMobile.Utility\RunMobile.Utility.csproj">
-      <Project>{029EA736-BCAA-40B3-B44B-52936740C349}</Project>
-      <Name>RunMobile.Utility</Name>
-    </ProjectReference>
+    <Compile Remove="Mathf.cs" />
   </ItemGroup>
 </Project>
