@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ProductVersion>8.0.30703</ProductVersion>
     <RootNamespace>FlatPhysics</RootNamespace>
-    <TargetFrameworks>net40;netstandard2.1;net471</TargetFrameworks>
+    <TargetFrameworks>net40;net5.0;net6.0</TargetFrameworks>
     <BaseIntermediateOutputPath>obj</BaseIntermediateOutputPath>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyTitle>FlatPhysics 2D Physics Engine</AssemblyTitle>
@@ -23,9 +23,9 @@
     <DefineConstants>USE_MATHF;_PRECISE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RunMobile\RunMobile.Utility\RunMobile.Utility.csproj" />
+    <Compile Remove="Mathf.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Mathf.cs" />
+    <ProjectReference Include="..\..\RunMobile\RunMobile.Utility\RunMobile.Utility.csproj" />
   </ItemGroup>
 </Project>
